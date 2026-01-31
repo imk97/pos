@@ -26,13 +26,6 @@
         </receiver>
 
         <activity
-            android:name=".widget.POSAppWidgetConfigureActivity"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".mainActivity.MainActivity"
             android:exported="true" >
             <intent-filter>
