@@ -1,13 +1,18 @@
 package com.aieitconsultant.pointofsalesmobile.mainActivity;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -25,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
     WebView myWebView;
     private MainActivityFunc mainActivityFuncs = new MainActivityFunc();
     SwipeRefreshLayout swipeRefreshLayout;
-
-//    https://pijau.xyz/nizar/login/login.php?hash=ugsdasgFUhgfUGhgyfSDgfxgfDgfgffhFhXGDdgfdJkhfcghxfjHGGFXDXfsdgFH
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        vibration();
+//        getWindow().getDecorView().performHapticFeedback(HapticFeedbackConstants.CONFIRM);
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // Check whether the key event is the Back button and if there's history.
@@ -64,12 +75,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRemoteWeb() throws FileNotFoundException {
         myWebView = (WebView) findViewById(R.id.webview);
+        //    https://pijau.xyz/nizar/login/login.php?hash=ugsdasgFUhgfUGhgyfSDgfxgfDgfgffhFhXGDdgfdJkhfcghxfjHGGFXDXfsdgFH
         String path = "/nizar/login/login.php?hash=" + mainActivityFuncs.getFile(this);
         myWebView.loadUrl(mainActivityFuncs.ownURL() + path);
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSupportZoom(true);
         webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
         myWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
         myWebView.setWebViewClient(mainActivityFuncs.shouldOverrideURL());
     }
@@ -94,6 +107,21 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    private void vibration() {
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+        if (vibrator != null && vibrator.hasVibrator()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(
+                        VibrationEffect.createOneShot(
+                                50, // milliseconds
+                                VibrationEffect.DEFAULT_AMPLITUDE
+                        )
+                );
+            }
+        }
     }
 
 
