@@ -17,7 +17,8 @@
         android:theme="@style/Theme.PointOfSalesMobile">
         <activity
             android:name=".mainActivity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Base.Theme.PointOfSalesMobile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

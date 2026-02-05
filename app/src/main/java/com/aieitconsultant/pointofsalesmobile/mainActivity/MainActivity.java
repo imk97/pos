@@ -10,6 +10,7 @@ import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.window.SplashScreen;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
