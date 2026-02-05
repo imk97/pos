@@ -4,4 +4,15 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="Theme.App.Splash" parent="Theme.SplashScreen">
+        <!-- Background splash -->
+        <item name="windowSplashScreenBackground">@color/black</item>
+
+        <!-- Icon / logo -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/rc_launcher_background</item>
+
+        <!-- Lepas splash, pergi ke theme app -->
+        <item name="postSplashScreenTheme">@style/Base.Theme.PointOfSalesMobile</item>
+    </style>
 </resources>
